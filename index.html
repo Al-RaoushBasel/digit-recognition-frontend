@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digit Recognition</title>
+
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <!-- Load Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  </head>
+  <body>
+    <!-- Background Animation Div -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+      <ul>
+        <li><a href="#hero">Welcome</a></li>
+        <li><a href="#canvas-section">Try the Canvas</a></li>
+        <li><a href="#about-section">How It Works</a></li>
+        <li><a href="#contact-section">Get in Touch</a></li>        
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-content">
+        <h1>Digit Recognition AI</h1>
+        <p>
+          Powered by advanced AI and Machine Learning, this tool delivers fast and accurate recognition of handwritten digits.
+        </p>
+        <div class="hero-buttons">
+          <button onclick="scrollToSection('canvas-section')">
+            Get Started
+          </button>
+          <button onclick="scrollToSection('about-section')">Learn More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-section" class="about-section">
+      <div class="about-card">
+        <h3>What the App Does</h3>
+        <p>
+           AI-powered web app recognizes handwritten digits using 
+          machine learning techniques. It predicts numbers (0-9) drawn on a
+          canvas or uploaded as an image.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h3>How It Works</h3>
+        <p>
+          The workflow includes preprocessing your input (canvas or image),
+          feeding it to a neural network, and predicting the digit with
+          optimized AI models.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h3>Technologies Used</h3>
+        <p>
+          Built using Python, TensorFlow, Flask, and modern web technologies
+          (HTML/CSS/JavaScript), this application showcases the power of AI-driven solutions.
+        </p>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="tips-section" class="tips-section">
+      <h2>How to Use</h2>
+      <div class="tips-container">
+        <div class="tip-card">
+          <span class="tip-icon">✏️</span>
+          <h3>Option 1: Draw a Digit</h3>
+          <p>
+            Use your mouse or touch to draw a digit (0-9) on the interactive canvas, then click <strong>Predict</strong> to see the result.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <span class="tip-icon">📂</span>
+          <h3>Option 2: Upload an Image</h3>
+          <p>
+            Upload a clear black digit on a white background and click
+            <strong>Predict Uploaded Image</strong>.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <span class="tip-icon">🗑️</span>
+          <h3>Clear the Canvas</h3>
+          <p>
+            Click <strong>Clear</strong> to reset the canvas and draw a new
+            digit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Canvas Section -->
+    <section id="canvas-section">
+      <div class="main-container">
+        <div class="left-section">
+          <div class="canvas-container">
+            <canvas id="canvas" width="280" height="280"></canvas>
+            <div class="buttons">
+              <button id="clearCanvas">🗑️ Clear</button>
+              <button id="predictCanvas">🤖 Predict</button>
+            </div>
+          </div>
+          <div class="file-upload">
+            <label for="uploadImage" class="custom-file-label">📂 Choose File</label>
+            <input type="file" id="uploadImage" accept="image/*" hidden />
+            <button id="predictImage" class="custom-button">🔍 Predict Uploaded Image</button>
+            <div id="uploadMessage" class="upload-message"></div>
+          </div>
+        </div>
+
+        <aside class="right-section">
+          <div class="prediction-section">
+            <h2>Prediction:</h2>
+            <div id="prediction-result">_</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact-section">
+      <div class="branding">
+        <p>Built by <strong>Basel Al-Raoush</strong></p>
+        <div class="links">
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
+          <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
+          <a href="mailto:youremail@example.com">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Load JavaScript -->
+    <script src="js/script.js"></script>
+
+    <!-- Particles.js Configuration -->
+    <script>
+      function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+      }
+
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#00ff7e" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: "#00ff7e", opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 2, direction: "none", random: false },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+          },
+          modes: {
+            grab: { distance: 200, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
+</html>

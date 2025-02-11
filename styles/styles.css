@@ -1,0 +1,482 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, #0f0f0f, #121212);
+  color: #b3b3b3;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Background Animation Canvas */
+#background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Navigation Bar */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(18, 18, 18, 0.95);
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: #00ff7e;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ffffff;
+  text-shadow: 0 0 5px #00ff7e, 0 0 10px #00ff7e;
+}
+
+/* Hero Section */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(to bottom, #0f0f0f, #121212);
+  color: #00ff7e;
+}
+
+#hero h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #00ff7e, #1afff2);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 20px;
+}
+
+#hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.hero-buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1.2rem;
+  background-color: #1a1a1a;
+  color: #00ff7e;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #00ff7e;
+  transition: transform 0.2s ease-in-out;
+}
+
+.hero-buttons button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #00ff7e;
+}
+
+/* Section Titles */
+h2,
+h3 {
+  color: #00ff7e;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* About Section */
+.about-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to right, #0f0f0f, #121212);
+  padding: 50px 20px;
+  color: #b3b3b3;
+  text-align: center;
+}
+
+.about-card {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff7e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 30%;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #00ff7e;
+}
+
+.about-card h3 {
+  font-size: 1.5rem;
+  color: #00ff7e;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Tips Section */
+.tips-section {
+  text-align: center;
+  padding: 40px 20px;
+  background: #0f0f0f;
+  color: #b3b3b3;
+}
+
+.tips-section h2 {
+  font-size: 2rem;
+  color: #00ff7e;
+  margin-bottom: 20px;
+}
+
+.tips-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tip-card {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff7e;
+  text-align: left;
+  max-width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tip-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #00ff7e;
+}
+
+.tip-card h3 {
+  font-size: 1.2rem;
+  color: #00ff7e;
+  margin-bottom: 10px;
+}
+
+.tip-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.tip-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: inline-block;
+  color: #00ff7e;
+}
+
+/* Canvas Section */
+#canvas-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #1a1a1a, #121212);
+}
+
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#canvas {
+  border: 2px solid #00ff7e;
+  box-shadow: 0 0 20px #00ff7e;
+  margin: 20px 0;
+  background-color: white;
+}
+
+/* Button Styling - Ensuring Consistency */
+.buttons button,
+.custom-button,
+.custom-file-label {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #1a1a1a;
+  color: #00ff7e;
+  box-shadow: 0 0 10px #00ff7e;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.buttons button:hover,
+.custom-button:hover,
+.custom-file-label:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #00ff7e;
+  background: #00ff7e;
+  color: #000000;
+}
+
+/* Specific style for the Clear button */
+#clearCanvas {
+  background: #1a1a1a;
+  color: #d70909;
+  box-shadow: 0 0 10px #d70909;
+}
+
+#clearCanvas:hover {
+  background: #d70909;
+  color: #ffffff;
+  box-shadow: 0 0 15px #d70909;
+}
+
+/* Prediction Section */
+.prediction-section {
+  text-align: center;
+  padding: 20px;
+}
+
+#prediction-result {
+  font-size: 2.5rem;
+  color: #00ff7e;
+  border: 1px solid #00ff7e;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 150px;
+  text-align: center;
+  background-color: rgba(0, 255, 126, 0.1);
+  transition: transform 0.2s;
+}
+
+#prediction-result:hover {
+  transform: scale(1.05);
+}
+
+
+/* Style for the file input replacement */
+.custom-file-label{
+  margin: 1px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #1a1a1a;
+  color: #00ff7e;
+  box-shadow: 0 0 10px #00ff7e;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-file-label:hover {
+  background: #00ff7e;
+  color: #000000;
+  box-shadow: 0 0 15px #00ff7e;
+}
+
+/* Style for the "Predict Uploaded Image" button */
+.custom-button{
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #1a1a1a;
+  color: #00ff7e;
+  box-shadow: 0 0 10px #00ff7e;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-button:hover {
+  background: #00ff7e;
+  color: #000000;
+  box-shadow: 0 0 15px #00ff7e;
+}
+
+/* Style for the upload success message */
+.upload-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #00ff7e;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #121212;
+  color: #b3b3b3;
+  font-size: 0.9rem;
+}
+
+footer .links a {
+  color: #00ff7e;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer .links a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 2.5rem; /* Adjust the font size for smaller screens */
+    line-height: 1.2;  /* Adjust line height for better spacing */
+    margin-bottom: 25px; /* Add some space below the title */
+  }
+
+  #hero p {
+    font-size: 1rem; /* Reduce the paragraph font size */
+    margin-bottom: 20px;
+  }
+
+  .hero-buttons button {
+    width: 80%; /* Make buttons smaller and fit the screen */
+    max-width: 300px;
+    margin: 10px auto; /* Center-align the buttons */
+  }
+
+  #canvas-section {
+    flex-direction: column;
+    padding: 20px;
+    align-items: center; /* Center the canvas section */
+  }
+
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Add space between sections */
+  }
+
+  .left-section {
+    width: 100%; /* Make sections full-width */
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center the buttons */
+    gap: 20px; /* Add consistent spacing between buttons */
+    width: 100%; /* Ensure buttons take up the container's width */
+  }
+
+  .buttons button,
+  #clearCanvas,
+  #predictCanvas,
+  #predictImage {
+    width: 90%; /* Consistent width for all buttons */
+    max-width: 300px; /* Limit maximum width */
+    padding: 10px; /* Equal padding for height consistency */
+    box-sizing: border-box; /* Include padding in the button width */
+    margin: 0 auto; /* Center buttons */
+  }
+
+  .custom-file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 200px;
+    width: 90%; /* Center and adjust file upload area width */
+    margin: 10px auto;
+  }
+
+  #canvas {
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto; /* Center the canvas */
+    padding: 10px; /* Add spacing around canvas */
+  }
+
+  .prediction-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  /* Disable hover effects */
+  .buttons button:hover,
+  #clearCanvas:hover,
+  #predictCanvas:hover,
+  #predictImage:hover,
+  .custom-file-label:hover {
+    transform: none; /* Remove scaling */
+    box-shadow: none; /* Remove shadow effect */
+    background: inherit; /* Keep the original background */
+    color: inherit; /* Keep the original text color */
+  }
+
+
+    /* About Section */
+    .about-section {
+      display: flex;
+      flex-direction: column; /* Stack cards vertically */
+      align-items: center; /* Center cards horizontally */
+      gap: 20px; /* Add spacing between the cards */
+      padding: 20px;
+    }
+  
+    .about-card {
+      width: 90%; /* Adjust card width to fit the screen */
+      max-width: 400px; /* Limit the maximum width */
+      text-align: center; /* Center align text inside the card */
+      padding: 15px; /* Add padding for content inside the card */
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
+  
+    .about-card h3 {
+      font-size: 1.5rem; /* Adjust heading font size */
+      margin-bottom: 10px;
+    }
+  
+    .about-card p {
+      font-size: 1rem; /* Adjust paragraph font size */
+      line-height: 1.5; /* Improve readability */
+    }
+}
+
+
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Ensures it stays behind all other content */
+  background: #000000; /* Fallback for browsers that don't support particles.js */
+}
+
+.main-container {
+  display: flex;
+  gap: 20px;
+}
