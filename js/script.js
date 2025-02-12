@@ -103,13 +103,16 @@ async function prepareCanvasImage() {
   return new Promise((resolve) => offscreenCanvas.toBlob(resolve, "image/png"));
 }
 
+// Update API URL to match Render deployment
+const API_URL = "https://digit-recognition-backend-woza.onrender.com";
+
 // Function to send image to backend and display the prediction
 async function sendImageToBackend(image) {
   const formData = new FormData();
   formData.append("file", image);
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/predict", {
+    const response = await fetch(`${API_URL}/predict`, {
       method: "POST",
       body: formData,
     });
