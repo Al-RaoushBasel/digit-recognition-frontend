@@ -104,7 +104,7 @@ async function prepareCanvasImage() {
 }
 
 // Update API URL to match Render deployment
-const API_URL = "https://digit-recognition-backend-woza.onrender.com";
+const API_URL = "https://digit-recognition-backend-production.up.railway.app";
 
 // Function to send image to backend and display the prediction
 async function sendImageToBackend(image) {
