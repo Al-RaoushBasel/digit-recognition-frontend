@@ -1,4 +1,3 @@
-// Canvas drawing setup
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let isDrawing = false;
@@ -12,33 +11,59 @@ function initializeCanvas() {
 }
 initializeCanvas();
 
-// Event listeners for drawing on the canvas
-canvas.addEventListener("mousedown", (e) => {
+// Helper function to get touch/mouse position
+function getPosition(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (event.clientX || event.touches[0].clientX) - rect.left,
+    y: (event.clientY || event.touches[0].clientY) - rect.top
+  };
+}
+
+// Start Drawing (Mouse & Touch)
+function startDrawing(event) {
   isDrawing = true;
-  [lastX, lastY] = [e.offsetX, e.offsetY]; // Start drawing at this position
-});
+  const pos = getPosition(event);
+  lastX = pos.x;
+  lastY = pos.y;
+}
 
-canvas.addEventListener("mouseup", () => {
+// Stop Drawing
+function stopDrawing() {
   isDrawing = false;
-  ctx.beginPath(); // Reset the path to avoid connecting new lines to the last point
-});
+  ctx.beginPath(); // Reset path
+}
 
-canvas.addEventListener("mousemove", draw);
-
-// Function to draw smooth lines on the canvas
-function draw(e) {
+// Draw Function (Mouse & Touch)
+function draw(event) {
   if (!isDrawing) return;
+  event.preventDefault(); // Prevent scrolling on touch
+
+  const pos = getPosition(event);
   ctx.strokeStyle = "black"; // Brush color
   ctx.lineWidth = 20; // Brush size
-  ctx.lineCap = "round"; // Rounded brush strokes
-  ctx.lineJoin = "round"; // Smooth connection between lines
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
 
   ctx.beginPath();
-  ctx.moveTo(lastX, lastY); // Start from the last position
-  ctx.lineTo(e.offsetX, e.offsetY); // Draw a line to the current position
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(pos.x, pos.y);
   ctx.stroke();
-  [lastX, lastY] = [e.offsetX, e.offsetY]; // Update the last position
+
+  lastX = pos.x;
+  lastY = pos.y;
 }
+
+// Add event listeners for both mouse and touch
+canvas.addEventListener("mousedown", startDrawing);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", stopDrawing);
+canvas.addEventListener("mouseleave", stopDrawing);
+
+// Touch events for mobile
+canvas.addEventListener("touchstart", startDrawing);
+canvas.addEventListener("touchmove", draw);
+canvas.addEventListener("touchend", stopDrawing);
 
 // Clear the canvas
 document.getElementById("clearCanvas").addEventListener("click", clearCanvas);
@@ -70,43 +95,33 @@ document.getElementById("predictImage").addEventListener("click", () => {
   }
 });
 
-// Get references to the file input and message display
 const uploadInput = document.getElementById("uploadImage");
 const uploadMessage = document.getElementById("uploadMessage");
 
-// Add an event listener for file selection
 uploadInput.addEventListener("change", () => {
   if (uploadInput.files.length > 0) {
     const fileName = uploadInput.files[0].name;
     uploadMessage.innerText = `File " ${fileName} " uploaded successfully! ✅`;
   } else {
-    uploadMessage.innerText = ""; // Clear the message if no file is selected
+    uploadMessage.innerText = "";
   }
 });
 
-// Function to prepare the canvas image for prediction
 async function prepareCanvasImage() {
-  // Create an offscreen canvas to resize the current canvas data
   const offscreenCanvas = document.createElement("canvas");
   offscreenCanvas.width = 280;
   offscreenCanvas.height = 280;
   const offscreenCtx = offscreenCanvas.getContext("2d");
 
-  // Initialize the offscreen canvas with a white background
   offscreenCtx.fillStyle = "white";
   offscreenCtx.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
-
-  // Draw the current canvas content onto the offscreen canvas
   offscreenCtx.drawImage(canvas, 0, 0, 280, 280);
 
-  // Convert the offscreen canvas to a Blob
   return new Promise((resolve) => offscreenCanvas.toBlob(resolve, "image/png"));
 }
 
-// Update API URL to match Render deployment
 const API_URL = "https://digit-recognition-backend-production.up.railway.app";
 
-// Function to send image to backend and display the prediction
 async function sendImageToBackend(image) {
   const formData = new FormData();
   formData.append("file", image);
@@ -119,9 +134,7 @@ async function sendImageToBackend(image) {
 
     if (response.ok) {
       const result = await response.json();
-      // Update the prediction result in the section
-      document.getElementById("prediction-result").innerText =
-        result.prediction;
+      document.getElementById("prediction-result").innerText = result.prediction;
     } else {
       console.error("Error in backend response:", response.statusText);
       document.getElementById("prediction-result").innerText = "Error";
@@ -132,16 +145,14 @@ async function sendImageToBackend(image) {
   }
 }
 
-// Smooth Scrolling for Navigation Links
 document.querySelectorAll("nav ul li a").forEach((link) => {
   link.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent default anchor behavior
-    const sectionId = link.getAttribute("href").substring(1); // Get section ID without the "#"
-    document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" }); // Smooth scroll to section
+    event.preventDefault();
+    const sectionId = link.getAttribute("href").substring(1);
+    document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
   });
 });
 
-// Highlight Active Section in Navbar
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav ul li a");
 
@@ -149,13 +160,10 @@ window.addEventListener("scroll", () => {
   let currentSection = "";
 
   sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 60; // Adjust for navbar height
+    const sectionTop = section.offsetTop - 60;
     const sectionHeight = section.offsetHeight;
 
-    if (
-      window.scrollY >= sectionTop &&
-      window.scrollY < sectionTop + sectionHeight
-    ) {
+    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
       currentSection = section.getAttribute("id");
     }
   });
