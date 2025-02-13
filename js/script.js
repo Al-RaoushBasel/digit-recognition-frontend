@@ -122,7 +122,23 @@ async function prepareCanvasImage() {
 
 const API_URL = "https://digit-recognition-backend-production.up.railway.app";
 
+// Allowed file types
+const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+
 async function sendImageToBackend(image) {
+  // Validate file type (if uploaded from input)
+  if (image instanceof File) {
+    if (!allowedFileTypes.includes(image.type)) {
+      alert("❌ Invalid file type! Please upload a PNG, JPG, or WEBP image.");
+      return;
+    }
+    if (image.size > maxFileSize) {
+      alert("❌ File is too large! Please upload an image under 2MB.");
+      return;
+    }
+  }
+
   const formData = new FormData();
   formData.append("file", image);
 
@@ -144,6 +160,7 @@ async function sendImageToBackend(image) {
     document.getElementById("prediction-result").innerText = "Error";
   }
 }
+
 
 document.querySelectorAll("nav ul li a").forEach((link) => {
   link.addEventListener("click", (event) => {
