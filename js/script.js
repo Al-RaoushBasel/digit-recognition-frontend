@@ -11,16 +11,16 @@ function initializeCanvas() {
 }
 initializeCanvas();
 
-// Helper function to get touch/mouse position
+// Get touch/mouse position relative to canvas
 function getPosition(event) {
   const rect = canvas.getBoundingClientRect();
   return {
     x: (event.clientX || event.touches[0].clientX) - rect.left,
-    y: (event.clientY || event.touches[0].clientY) - rect.top
+    y: (event.clientY || event.touches[0].clientY) - rect.top,
   };
 }
 
-// Start Drawing (Mouse & Touch)
+// Start drawing
 function startDrawing(event) {
   isDrawing = true;
   const pos = getPosition(event);
@@ -28,20 +28,20 @@ function startDrawing(event) {
   lastY = pos.y;
 }
 
-// Stop Drawing
+// Stop drawing
 function stopDrawing() {
   isDrawing = false;
-  ctx.beginPath(); // Reset path
+  ctx.beginPath();
 }
 
-// Draw Function (Mouse & Touch)
+// Draw on canvas
 function draw(event) {
   if (!isDrawing) return;
-  event.preventDefault(); // Prevent scrolling on touch
+  event.preventDefault();
 
   const pos = getPosition(event);
-  ctx.strokeStyle = "black"; // Brush color
-  ctx.lineWidth = 20; // Brush size
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 20;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
@@ -54,59 +54,72 @@ function draw(event) {
   lastY = pos.y;
 }
 
-// Add event listeners for both mouse and touch
+// Add event listeners for drawing
 canvas.addEventListener("mousedown", startDrawing);
 canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mouseup", stopDrawing);
 canvas.addEventListener("mouseleave", stopDrawing);
-
-// Touch events for mobile
 canvas.addEventListener("touchstart", startDrawing);
 canvas.addEventListener("touchmove", draw);
 canvas.addEventListener("touchend", stopDrawing);
 
-// Clear the canvas
+// Clear canvas
+function clearCanvas() {
+  initializeCanvas();
+  document.getElementById("prediction-result").innerText = "_";
+}
 document.getElementById("clearCanvas").addEventListener("click", clearCanvas);
 
-function clearCanvas() {
-  initializeCanvas(); // Reset canvas to its initial state
-  document.getElementById("prediction-result").innerText = "_"; // Reset prediction display
-}
-
-// Predict from canvas
-document.getElementById("predictCanvas").addEventListener("click", async () => {
+// Predict digit from canvas
+async function predictFromCanvas() {
   try {
     const imageBlob = await prepareCanvasImage();
     await sendImageToBackend(imageBlob);
   } catch (error) {
     console.error("Error during canvas prediction:", error);
   }
-});
+}
+document
+  .getElementById("predictCanvas")
+  .addEventListener("click", predictFromCanvas);
 
-// Predict from uploaded image
-document.getElementById("predictImage").addEventListener("click", () => {
+// Predict digit from uploaded image
+function predictFromImage() {
   const fileInput = document.getElementById("uploadImage");
   const file = fileInput.files[0];
-  if (file) {
-    sendImageToBackend(file);
-  } else {
-    console.warn("No file selected for upload.");
-    alert("Please choose an image file to upload.");
-  }
-});
 
+  if (!file) {
+    alert("Please choose an image file to upload.");
+    return;
+  }
+
+  if (!allowedFileTypes.includes(file.type)) {
+    alert("Invalid file type! Please upload a PNG, JPG, or WEBP image.");
+    return;
+  }
+
+  if (file.size > maxFileSize) {
+    alert("File is too large! Please upload an image under 2MB.");
+    return;
+  }
+
+  sendImageToBackend(file);
+}
+document
+  .getElementById("predictImage")
+  .addEventListener("click", predictFromImage);
+
+// Display uploaded file name
 const uploadInput = document.getElementById("uploadImage");
 const uploadMessage = document.getElementById("uploadMessage");
-
 uploadInput.addEventListener("change", () => {
-  if (uploadInput.files.length > 0) {
-    const fileName = uploadInput.files[0].name;
-    uploadMessage.innerText = `File " ${fileName} " uploaded successfully! ✅`;
-  } else {
-    uploadMessage.innerText = "";
-  }
+  uploadMessage.innerText =
+    uploadInput.files.length > 0
+      ? `File "${uploadInput.files[0].name}" uploaded successfully! ✅`
+      : "";
 });
 
+// Prepare canvas image for sending
 async function prepareCanvasImage() {
   const offscreenCanvas = document.createElement("canvas");
   offscreenCanvas.width = 280;
@@ -121,24 +134,11 @@ async function prepareCanvasImage() {
 }
 
 const API_URL = "https://digit-recognition-backend-production.up.railway.app";
-
-// Allowed file types
 const allowedFileTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
-const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+const maxFileSize = 2 * 1024 * 1024;
 
+// Send image to backend for prediction
 async function sendImageToBackend(image) {
-  // Validate file type (if uploaded from input)
-  if (image instanceof File) {
-    if (!allowedFileTypes.includes(image.type)) {
-      alert("❌ Invalid file type! Please upload a PNG, JPG, or WEBP image.");
-      return;
-    }
-    if (image.size > maxFileSize) {
-      alert("❌ File is too large! Please upload an image under 2MB.");
-      return;
-    }
-  }
-
   const formData = new FormData();
   formData.append("file", image);
 
@@ -147,48 +147,43 @@ async function sendImageToBackend(image) {
       method: "POST",
       body: formData,
     });
-
-    if (response.ok) {
-      const result = await response.json();
-      document.getElementById("prediction-result").innerText = result.prediction;
-    } else {
-      console.error("Error in backend response:", response.statusText);
-      document.getElementById("prediction-result").innerText = "Error";
-    }
+    const result = await response.json();
+    document.getElementById("prediction-result").innerText = response.ok
+      ? result.prediction
+      : "Error";
   } catch (error) {
     console.error("Error connecting to backend:", error);
     document.getElementById("prediction-result").innerText = "Error";
   }
 }
 
-
+// Smooth scrolling for navigation links
 document.querySelectorAll("nav ul li a").forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
-    const sectionId = link.getAttribute("href").substring(1);
-    document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById(link.getAttribute("href").substring(1))
+      .scrollIntoView({ behavior: "smooth" });
   });
 });
 
+// Highlight active section in navigation
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav ul li a");
-
 window.addEventListener("scroll", () => {
   let currentSection = "";
-
   sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 60;
-    const sectionHeight = section.offsetHeight;
-
-    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+    if (
+      window.scrollY >= section.offsetTop - 60 &&
+      window.scrollY < section.offsetTop + section.offsetHeight
+    ) {
       currentSection = section.getAttribute("id");
     }
   });
-
   navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href").substring(1) === currentSection) {
-      link.classList.add("active");
-    }
+    link.classList.toggle(
+      "active",
+      link.getAttribute("href").substring(1) === currentSection
+    );
   });
 });

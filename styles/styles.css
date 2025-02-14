@@ -11,16 +11,18 @@ body {
   color: #b3b3b3;
   line-height: 1.6;
   overflow-x: hidden;
+  text-align: center;
 }
 
-/* Background Animation Canvas */
-#background-animation {
+/* Background Animation */
+#background-animation, #particles-js {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: -1;
+  background: transparent;
 }
 
 /* Navigation Bar */
@@ -38,14 +40,16 @@ nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
 }
 
 nav ul li a {
   color: #00ff7e;
   text-decoration: none;
-  padding: 10px 15px;
-  font-size: 1rem;
+  padding: 8px 12px;
+  font-size: 0.9rem;
   transition: color 0.2s, text-shadow 0.2s;
 }
 
@@ -57,15 +61,16 @@ nav ul li a.active {
 
 /* Hero Section */
 #hero {
+  position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(to bottom, #0f0f0f, #121212);
-  color: #00ff7e;
+  z-index: 1; 
 }
+
 
 #hero h1 {
   font-size: 4rem;
@@ -98,178 +103,85 @@ nav ul li a.active {
   box-shadow: 0 0 15px #00ff7e;
 }
 
-/* Section Titles */
-h2,
-h3 {
+/* Sections Styling */
+h2, h3 {
   color: #00ff7e;
-  text-align: center;
   margin: 20px 0;
 }
 
-/* About Section */
-.about-section {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: linear-gradient(to right, #0f0f0f, #121212);
+.about-section, .tips-section {
   padding: 50px 20px;
-  color: #b3b3b3;
   text-align: center;
-}
-
-.about-card {
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ff7e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 30%;
-}
-
-.about-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 20px #00ff7e;
-}
-
-.about-card h3 {
-  font-size: 1.5rem;
-  color: #00ff7e;
-  margin-bottom: 10px;
-}
-
-.about-card p {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* Tips Section */
-.tips-section {
-  text-align: center;
-  padding: 40px 20px;
   background: #0f0f0f;
-  color: #b3b3b3;
 }
 
-.tips-section h2 {
-  font-size: 2rem;
-  color: #00ff7e;
-  margin-bottom: 20px;
-}
-
-.tips-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.tip-card {
+.about-card, .tip-card {
   background: #1a1a1a;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px #00ff7e;
-  text-align: left;
-  max-width: 300px;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: inline-block;
+  width: 30%;
+  margin: 10px;
 }
 
-.tip-card:hover {
+.about-card:hover, .tip-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 0 20px #00ff7e;
-}
-
-.tip-card h3 {
-  font-size: 1.2rem;
-  color: #00ff7e;
-  margin-bottom: 10px;
-}
-
-.tip-card p {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.tip-icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  display: inline-block;
-  color: #00ff7e;
 }
 
 /* Canvas Section */
 #canvas-section {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
-  background: linear-gradient(to bottom, #1a1a1a, #121212);
+  padding: 30px 10px;
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
-.canvas-container {
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.left-section, .right-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 #canvas {
   border: 2px solid #00ff7e;
   box-shadow: 0 0 20px #00ff7e;
-  margin: 20px 0;
   background-color: white;
-}
-
-/* Button Styling - Ensuring Consistency */
-.buttons button,
-.custom-button,
-.custom-file-label {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background: #1a1a1a;
-  color: #00ff7e;
-  box-shadow: 0 0 10px #00ff7e;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.buttons button:hover,
-.custom-button:hover,
-.custom-file-label:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px #00ff7e;
-  background: #00ff7e;
-  color: #000000;
-}
-
-/* Specific style for the Clear button */
-#clearCanvas {
-  background: #1a1a1a;
-  color: #d70909;
-  box-shadow: 0 0 10px #d70909;
-}
-
-#clearCanvas:hover {
-  background: #d70909;
-  color: #ffffff;
-  box-shadow: 0 0 15px #d70909;
+  margin-bottom: 20px;
+  max-width: 100%;
 }
 
 /* Prediction Section */
 .prediction-section {
   text-align: center;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #prediction-result {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #00ff7e;
   border: 1px solid #00ff7e;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
-  margin: 0 auto;
-  width: 150px;
+  width: 140px;
   text-align: center;
   background-color: rgba(0, 255, 126, 0.1);
   transition: transform 0.2s;
@@ -279,11 +191,19 @@ h3 {
   transform: scale(1.05);
 }
 
+/* Buttons Styling */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
 
-/* Style for the file input replacement */
-.custom-file-label{
-  margin: 1px;
-  padding: 10px 20px;
+.buttons button, .custom-button, .custom-file-label {
+  width: 100%;
+  max-width: 280px;
+  padding: 12px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
@@ -291,40 +211,28 @@ h3 {
   color: #00ff7e;
   box-shadow: 0 0 10px #00ff7e;
   transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.custom-file-label:hover {
-  background: #00ff7e;
-  color: #000000;
+.buttons button:hover, .custom-button:hover, .custom-file-label:hover {
+  transform: scale(1.05);
   box-shadow: 0 0 15px #00ff7e;
 }
 
-/* Style for the "Predict Uploaded Image" button */
-.custom-button{
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background: #1a1a1a;
-  color: #00ff7e;
-  box-shadow: 0 0 10px #00ff7e;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.custom-button:hover {
-  background: #00ff7e;
-  color: #000000;
-  box-shadow: 0 0 15px #00ff7e;
-}
-
-/* Style for the upload success message */
-.upload-message {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #00ff7e;
-  font-weight: bold;
-  text-align: left;
+/* Fix Choose File Button to Match Other Buttons */
+.custom-file-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 280px;
+  height: 45px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 /* Footer */
@@ -347,136 +255,43 @@ footer .links a:hover {
   color: #ffffff;
 }
 
-/* Responsive Design */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   #hero h1 {
-    font-size: 2.5rem; /* Adjust the font size for smaller screens */
-    line-height: 1.2;  /* Adjust line height for better spacing */
-    margin-bottom: 25px; /* Add some space below the title */
+    font-size: 2rem;
+    line-height: 1.3;
+    padding: 10px;
   }
-
-  #hero p {
-    font-size: 1rem; /* Reduce the paragraph font size */
-    margin-bottom: 20px;
+  .about-section, .tips-section {
+    padding: 15px;
   }
-
-  .hero-buttons button {
-    width: 80%; /* Make buttons smaller and fit the screen */
-    max-width: 300px;
-    margin: 10px auto; /* Center-align the buttons */
-  }
-
-  #canvas-section {
-    flex-direction: column;
-    padding: 20px;
-    align-items: center; /* Center the canvas section */
-  }
-
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px; /* Add space between sections */
-  }
-
-  .left-section {
-    width: 100%; /* Make sections full-width */
-    text-align: center;
-  }
-
   .buttons {
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center; /* Center the buttons */
-    gap: 20px; /* Add consistent spacing between buttons */
-    width: 100%; /* Ensure buttons take up the container's width */
+    width: 100%;
   }
-
-  .buttons button,
-  #clearCanvas,
-  #predictCanvas,
-  #predictImage {
-    width: 90%; /* Consistent width for all buttons */
-    max-width: 300px; /* Limit maximum width */
-    padding: 10px; /* Equal padding for height consistency */
-    box-sizing: border-box; /* Include padding in the button width */
-    margin: 0 auto; /* Center buttons */
+  .buttons button {
+    width: 95%;
+    max-width: 320px;
   }
-
-  .custom-file-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 200px;
-    width: 90%; /* Center and adjust file upload area width */
-    margin: 10px auto;
+  .about-card, .tip-card {
+    width: 90%;
+    max-width: 400px;
   }
-
-  #canvas {
-    max-width: 90%;
-    height: auto;
-    margin: 0 auto; /* Center the canvas */
-    padding: 10px; /* Add spacing around canvas */
-  }
-
-  .prediction-section {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  /* Disable hover effects */
-  .buttons button:hover,
-  #clearCanvas:hover,
-  #predictCanvas:hover,
-  #predictImage:hover,
-  .custom-file-label:hover {
-    transform: none; /* Remove scaling */
-    box-shadow: none; /* Remove shadow effect */
-    background: inherit; /* Keep the original background */
-    color: inherit; /* Keep the original text color */
-  }
-
-
-    /* About Section */
-    .about-section {
-      display: flex;
-      flex-direction: column; /* Stack cards vertically */
-      align-items: center; /* Center cards horizontally */
-      gap: 20px; /* Add spacing between the cards */
-      padding: 20px;
-    }
-  
-    .about-card {
-      width: 90%; /* Adjust card width to fit the screen */
-      max-width: 400px; /* Limit the maximum width */
-      text-align: center; /* Center align text inside the card */
-      padding: 15px; /* Add padding for content inside the card */
-      box-sizing: border-box; /* Include padding in width calculation */
-    }
-  
-    .about-card h3 {
-      font-size: 1.5rem; /* Adjust heading font size */
-      margin-bottom: 10px;
-    }
-  
-    .about-card p {
-      font-size: 1rem; /* Adjust paragraph font size */
-      line-height: 1.5; /* Improve readability */
-    }
 }
-
-
 
 #particles-js {
-  position: absolute;
+  position: fixed; 
   width: 100%;
-  height: 100%;
+  height: 100vh;
   top: 0;
   left: 0;
-  z-index: -1; /* Ensures it stays behind all other content */
-  background: #000000; /* Fallback for browsers that don't support particles.js */
+  z-index: -1;
+  background: transparent; 
 }
 
-.main-container {
+.file-upload {
+  width: 100%;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

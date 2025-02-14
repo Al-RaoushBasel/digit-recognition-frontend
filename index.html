@@ -21,16 +21,18 @@
         <li><a href="#hero">Welcome</a></li>
         <li><a href="#canvas-section">Try the Canvas</a></li>
         <li><a href="#about-section">How It Works</a></li>
-        <li><a href="#contact-section">Get in Touch</a></li>        
+        <li><a href="#contact-section">Get in Touch</a></li>
       </ul>
     </nav>
 
     <!-- Hero Section -->
+    <div id="particles-js"></div>
     <section id="hero">
       <div class="hero-content">
         <h1>Digit Recognition AI</h1>
         <p>
-          Powered by advanced AI and Machine Learning, this tool delivers fast and accurate recognition of handwritten digits.
+          Powered by advanced AI and Machine Learning, this tool delivers fast
+          and accurate recognition of handwritten digits.
         </p>
         <div class="hero-buttons">
           <button onclick="scrollToSection('canvas-section')">
@@ -46,9 +48,9 @@
       <div class="about-card">
         <h3>What the App Does</h3>
         <p>
-           AI-powered web app recognizes handwritten digits using 
-          machine learning techniques. It predicts numbers (0-9) drawn on a
-          canvas or uploaded as an image.
+          AI-powered web app recognizes handwritten digits using machine
+          learning techniques. It predicts numbers (0-9) drawn on a canvas or
+          uploaded as an image.
         </p>
       </div>
 
@@ -65,7 +67,8 @@
         <h3>Technologies Used</h3>
         <p>
           Built using Python, TensorFlow, Flask, and modern web technologies
-          (HTML/CSS/JavaScript), this application showcases the power of AI-driven solutions.
+          (HTML/CSS/JavaScript), this application showcases the power of
+          AI-driven solutions.
         </p>
       </div>
     </section>
@@ -78,7 +81,8 @@
           <span class="tip-icon">✏️</span>
           <h3>Option 1: Draw a Digit</h3>
           <p>
-            Use your mouse or touch to draw a digit (0-9) on the interactive canvas, then click <strong>Predict</strong> to see the result.
+            Use your mouse or touch to draw a digit (0-9) on the interactive
+            canvas, then click <strong>Predict</strong> to see the result.
           </p>
         </div>
 
@@ -111,12 +115,17 @@
             <div class="buttons">
               <button id="clearCanvas">🗑️ Clear</button>
               <button id="predictCanvas">🤖 Predict</button>
+              <div id="loading-spinner" class="hidden"></div>
             </div>
           </div>
           <div class="file-upload">
-            <label for="uploadImage" class="custom-file-label">📂 Choose File</label>
+            <label for="uploadImage" class="custom-file-label"
+              >📂 Choose File</label
+            >
             <input type="file" id="uploadImage" accept="image/*" hidden />
-            <button id="predictImage" class="custom-button">🔍 Predict Uploaded Image</button>
+            <button id="predictImage" class="custom-button">
+              🔍 Predict Uploaded Image
+            </button>
             <div id="uploadMessage" class="upload-message"></div>
           </div>
         </div>
@@ -135,9 +144,12 @@
       <div class="branding">
         <p>Built by <strong>Basel Al-Raoush</strong></p>
         <div class="links">
-          <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
-          <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
-          <a href="mailto:youremail@example.com">Email</a>
+          <a href="https://github.com/Al-RaoushBasel" target="_blank">GitHub</a> |
+          <a href="https://www.linkedin.com/in/basel-al-raoush/" target="_blank"
+            >LinkedIn</a
+          >
+          |
+          <a href="mailto:basel.alraoush15@gmail.com">Email</a>
         </div>
       </div>
     </footer>
@@ -148,32 +160,42 @@
     <!-- Particles.js Configuration -->
     <script>
       function scrollToSection(sectionId) {
-        document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById(sectionId)
+          .scrollIntoView({ behavior: "smooth" });
       }
 
-      particlesJS("particles-js", {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#00ff7e" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5 },
-          size: { value: 3, random: true },
-          line_linked: { enable: true, distance: 150, color: "#00ff7e", opacity: 0.4, width: 1 },
-          move: { enable: true, speed: 2, direction: "none", random: false },
+      document.addEventListener("DOMContentLoaded", function () {
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ff7e" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00ff7e",
+          opacity: 0.4,
+          width: 1,
         },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "grab" },
-            onclick: { enable: true, mode: "push" },
-          },
-          modes: {
-            grab: { distance: 200, line_linked: { opacity: 1 } },
-            push: { particles_nb: 4 },
-          },
+        move: { enable: true, speed: 2, direction: "none", random: false },
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
         },
-        retina_detect: true,
-      });
+        modes: {
+          grab: { distance: 200, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 },
+        },
+      },
+      retina_detect: true,
+    });
+  });
     </script>
   </body>
 </html>
