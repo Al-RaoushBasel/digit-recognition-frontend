@@ -295,3 +295,16 @@ footer .links a:hover {
   align-items: center;
   justify-content: center;
 }
+
+.instruction {
+  text-align: center;
+  color: #00ff99;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.instruction small {
+  font-size: 12px;
+  color: #00cc77;
+}
